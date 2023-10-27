@@ -1,15 +1,29 @@
-import { useState } from 'react'
-import './App.css'
+import React from 'react'
+import { useDisclosure } from '@mantine/hooks';
+import { AppShell, Container } from '@mantine/core';
 
-// core styles are required for all packages
+// import './App.css'
 import '@mantine/core/styles.css';
 
-import DataLoad from './components/LoadData'
+import { Header } from './components/Header/Header'
 
 function App() {
-  return <>
-    <DataLoad />
-  </>
+  return (
+    <AppShell
+      header={{ height: 60 }}
+      padding="md"
+    >
+      <AppShell.Header>
+        <Header />
+      </AppShell.Header>
+
+      <AppShell.Main>
+        <Container>
+          <div>HI!</div>
+        </Container>
+      </AppShell.Main>
+    </AppShell>
+  )
 }
 
 export default App

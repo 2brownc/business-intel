@@ -6,7 +6,7 @@ import { Button } from '@mantine/core'
 import { FileInput } from '@mantine/core'
 import { v4 as uuidv4 } from 'uuid';
 
-import { insertDataAll } from '../db/util'
+import { insertDataAll } from '../../db/util'
 
 function DataLoad() {
   const [files, setFiles] = useState([])
