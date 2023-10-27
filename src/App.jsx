@@ -6,6 +6,7 @@ import { AppShell, Container } from '@mantine/core';
 import '@mantine/core/styles.css';
 
 import { Header } from './components/Header/Header'
+import Home from './pages/Home/Home'
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
 
       <AppShell.Main>
         <Container>
-          <div>HI!</div>
+          <Home />
         </Container>
       </AppShell.Main>
     </AppShell>

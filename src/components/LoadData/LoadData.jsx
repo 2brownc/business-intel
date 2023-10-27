@@ -4,6 +4,7 @@ import { Container } from '@mantine/core'
 import { Grid } from '@mantine/core'
 import { Button } from '@mantine/core'
 import { FileInput } from '@mantine/core'
+import { Center } from '@mantine/core';
 import { v4 as uuidv4 } from 'uuid';
 
 import { insertDataAll } from '../../db/util'
@@ -82,24 +83,27 @@ function DataLoad() {
   }
 
   return (
-    <Container>
-      <Grid justify="center" align="flex-end">
-        <Grid.Col span={8}>
-          <FileInput
-            label={uploadLabel}
-            placeholder="Upload files"
-            multiple
-            onChange={handleChange}
-          />
-        </Grid.Col>
+    <Container mt={100}>
+      <Center>
+        <Grid w={500} justify="center" align="flex-end">
+          <Grid.Col span={8}>
+            <FileInput
+              label={uploadLabel}
+              placeholder="Click me to upload files"
+              multiple
+              onChange={handleChange}
+            />
+          </Grid.Col>
 
-        <Grid.Col span={4}>
-          <Button
-            variant="filled"
-            onClick={handleUpload}
-          >Upload</Button>
-        </Grid.Col>
-      </Grid>
+          <Grid.Col span={4}>
+            <Button
+              variant="filled"
+              onClick={handleUpload}
+              disabled={fileContents.length <= 0}
+            >Upload</Button>
+          </Grid.Col>
+        </Grid>
+      </Center>
     </Container>
   )
 
