@@ -1,14 +1,24 @@
 import React from 'react'
-import { useDisclosure } from '@mantine/hooks';
-import { AppShell, Container } from '@mantine/core';
-
-// import './App.css'
-import '@mantine/core/styles.css';
+import {
+  AppShell,
+  Container,
+  Title,
+  Text,
+} from '@mantine/core'
+import { Outlet } from 'react-router-dom';
 
 import { Header } from './components/Header/Header'
-import Home from './pages/Home/Home'
 
-function App() {
+function Intro() {
+  return <Container mb={100}>
+    <Title order={1}>Business Intel</Title>
+    <Text fs="italic">
+      Helps you gain a deeper understanding of the financial situation and make data-driven decisions to work towards financial goals with confidence.
+    </Text>
+  </Container>
+}
+
+export default function App({ children }) {
   return (
     <AppShell
       header={{ height: 60 }}
@@ -20,11 +30,12 @@ function App() {
 
       <AppShell.Main>
         <Container>
-          <Home />
+          <Intro />
+          <Outlet />
         </Container>
       </AppShell.Main>
+
     </AppShell>
   )
 }
 
-export default App

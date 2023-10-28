@@ -6,13 +6,16 @@ import { Button } from '@mantine/core'
 import { FileInput } from '@mantine/core'
 import { Center } from '@mantine/core';
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from "react-router-dom";
 
 import { insertDataAll } from '../../db/util'
 
-function DataLoad() {
+function LoadData() {
   const [files, setFiles] = useState([])
   const [fileContents, setFileContents] = useState([])
   const [uploadLabel, setUploadLabel] = useState("Upload Files: ")
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setFileContents([])
@@ -80,10 +83,13 @@ function DataLoad() {
         complete: (results) => prepareData(results.data)
       })
     }
+
+    // after inserting data into db goto Analysis page
+    navigate('/analysis')
   }
 
   return (
-    <Container mt={100}>
+    <Container>
       <Center>
         <Grid w={500} justify="center" align="flex-end">
           <Grid.Col span={8}>
@@ -100,7 +106,7 @@ function DataLoad() {
               variant="filled"
               onClick={handleUpload}
               disabled={fileContents.length <= 0}
-            >Upload</Button>
+            >Analyze</Button>
           </Grid.Col>
         </Grid>
       </Center>
@@ -109,4 +115,4 @@ function DataLoad() {
 
 }
 
-export default DataLoad;
+export default LoadData;
