@@ -1,120 +1,43 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Title } from '@mantine/core'
-import { Checkbox } from '@mantine/core'
-import { Autocomplete } from '@mantine/core'
+import { Button } from '@mantine/core'
+import { Container } from '@mantine/core'
 
-import {
-  getCategories,
-  findCategory,
-  getBanks,
-} from '../../db/util'
+import { Task1 } from './Task1'
+import { Task2 } from './Task2'
 
-import { TransactionTable } from '../../components/TransactionTable/TransactionTable'
-import { DateRange } from '../../components/DateRange/DateRange'
-
-function Banks({ banks, setSelectedBanks }) {
-  const handleChange = (event, bank) => {
-    const checked = event.currentTarget.checked
-    const pos = banks.indexOf(bank)
-
-    setSelectedBanks(oldOptions => {
-      if (!oldOptions) return null
-
-      const newOptions = oldOptions.map((option, index) => {
-        return (pos === index ? checked : option)
-      })
-
-      return newOptions
-    })
+export default function Analysis() {
+  const [selectedTask, setSelectedTask] = useState(1)
+  const setVariant = (taskNum) => {
+    return taskNum === selectedTask ? "filled" : "default"
   }
 
   return <>
-    {banks.map((bank, id) => {
-      return <Checkbox defaultChecked key={id} label={bank} onChange={(event) => handleChange(event, bank)} />
-    })}
-  </>
-}
-
-
-export default function Analysis() {
-  const [value, setValue] = useState('')
-  const [categories, setCategories] = useState([])
-  const [records, setRecords] = useState([])
-  const [filteredRecords, setFilteredRecords] = useState([])
-  const [banks, setBanks] = useState([])
-  const [selectedBanks, setSelectedbanks] = useState(null)
-  const [dateRange, setDateRange] = useState({ date1: null, date2: null })
-
-  // get categories for the autocomplete
-  useEffect(() => {
-    getCategories()
-      .then(result => {
-        setCategories(result)
-      })
-      .catch(error => {
-        throw new Error(`can't retrieve categories: ${error}`)
-      })
-  }, [])
-
-  // get transactions for a particular category
-  useEffect(() => {
-    if (value !== '') {
-      findCategory(value.trim())
-        .then(results => {
-          setRecords(results)
-        })
-        .catch(error => {
-          throw new Error(`can't retrive records for ${value}: ${error}`)
-        })
-    } else {
-      setRecords([])
-    }
-  }, [value])
-
-  // get all the banks for a banks filter
-  useEffect(() => {
-    getBanks()
-      .then(results => {
-        setBanks(results)
-        const options = results.map(result => true)
-        setSelectedbanks(options)
-      })
-      .catch(error => {
-        throw new Error(`can't retrive banks: ${error}`)
-      })
-  }, [])
-
-  // filter the transactions
-  useEffect(() => {
-    let filtered = records
-
-    // filter by banks
-    if (selectedBanks) {
-      filtered = filtered.filter(record => {
-        const pos = banks.indexOf(record.bank)
-        return selectedBanks[pos]
-      })
-    }
-
-    // filter by date
-    const { date1, date2 } = dateRange
-    if (date1 !== null && date2 !== null) {
-      filtered = filtered.filter(record => {
-        return (
-          record.date.getTime() >= date1.getTime()
-          && record.date.getTime() <= date2.getTime()
-        )
-      })
-    }
-
-    setFilteredRecords(filtered)
-  }, [selectedBanks, dateRange, records])
-
-  return <>
     <Title order={2}>Analysis</Title>
-    <Autocomplete data={categories} value={value} onChange={setValue} label={"Category"} />
-    <Banks banks={banks} setSelectedBanks={setSelectedbanks} />
-    <DateRange setDateRange={setDateRange} />
-    <TransactionTable elements={filteredRecords} />
+
+    <Container>
+      <Button.Group>
+        <Button
+          variant={setVariant(1)}
+          onClick={() => setSelectedTask(1)}>
+          Task #1
+        </Button>
+        <Button
+          variant={setVariant(2)}
+          onClick={() => setSelectedTask(2)}>
+          Task #2
+        </Button>
+        <Button
+          variant={setVariant(3)}
+          onClick={() => setSelectedTask(3)}>
+          Task #3
+        </Button>
+      </Button.Group>
+    </Container>
+
+    <Container>
+      {selectedTask === 1 && <Task1 />}
+      {selectedTask === 2 && <Task2 />}
+    </Container>
   </>
 }

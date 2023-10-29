@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react'
-import { Title } from '@mantine/core'
-import { Checkbox } from '@mantine/core'
-import { Autocomplete } from '@mantine/core'
+import { Title, Checkbox, Autocomplete } from '@mantine/core'
 
 import {
   getCategories,
@@ -36,7 +34,7 @@ function Banks({ banks, setSelectedBanks }) {
 }
 
 
-export default function Task1() {
+export function Task1() {
   const [value, setValue] = useState('')
   const [categories, setCategories] = useState([])
   const [records, setRecords] = useState([])
@@ -49,6 +47,10 @@ export default function Task1() {
   useEffect(() => {
     getCategories()
       .then(result => {
+        /*const categoriesSet = new Set()
+        for (const item of result) {
+          categoriesSet.add(item.trim().toLowerCase())
+        }*/
         setCategories(result)
       })
       .catch(error => {

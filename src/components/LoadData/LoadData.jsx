@@ -56,8 +56,12 @@ function LoadData() {
       const [day, month, year] = record.date.split("/");
       const date = new Date(year, month - 1, day);
 
+      //sanitize descriptions
+      const description = record.description.trim().toLowerCase()
+
       preparedData.push({
         ...record,
+        description,
         credit,
         debit,
         date,

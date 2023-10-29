@@ -6,14 +6,11 @@ import { Table } from '@mantine/core'
   elements = {tid, date, description, debit, credit, balance}
 */
 export function TransactionTable({ elements }) {
-  const date = new Date(2023, 10, 28)
-  format(date, 'dd/MM/yyyy')
-
   const rows = elements.map((element) => (
     <Table.Tr key={element.tid}>
       <Table.Td>{element.bank}</Table.Td>
       <Table.Td>{format(element.date, 'dd/MM/yyyy')}</Table.Td>
-      <Table.Td>{element.description}</Table.Td>
+      <Table.Td>{element.description.toUpperCase()}</Table.Td>
       <Table.Td>{element.debit}</Table.Td>
       <Table.Td>{element.credit}</Table.Td>
       <Table.Td>{element.balance}</Table.Td>
