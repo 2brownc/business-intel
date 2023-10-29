@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Container, Group, Burger } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import classes from './Header.module.css';
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react'
+import { Container, Group, Burger } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import classes from './Header.module.css'
+import { useNavigate, useMatch } from "react-router-dom"
 
 const links = [
   { link: '/', label: 'Home' },
@@ -12,17 +12,17 @@ const links = [
 ];
 
 export function Header() {
-  const [opened, { toggle }] = useDisclosure(false);
-  const [active, setActive] = useState(links[0].link);
+  const [opened, { toggle }] = useDisclosure(false)
+  const [active, setActive] = useState(links[0].link)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const items = links.map((link) => (
     <a
       key={link.label}
       href={link.link}
       className={classes.link}
-      data-active={active === link.link || undefined}
+      data-active={useMatch(link.link)}
       onClick={(event) => {
         event.preventDefault()
         setActive(link.link)
