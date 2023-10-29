@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Title, Container } from '@mantine/core'
+import {
+  Title,
+  Container,
+  Center,
+  Text
+} from '@mantine/core'
 
 import {
   getCategories,
@@ -8,28 +13,11 @@ import {
 
 import { TrendChart } from '../../components/Charts/TrendChart'
 
-function top5credit(data) {
-  data.sort((a, b) => b.credit - a.credit);
-  const top3Categories = []
-  for (let i = 0; i < 5; i++) {
-    top3Categories.push({ name: data[i].category, value: parseInt(data[i].credit) })
-  }
-  return top3Categories
-}
-
-function top5debit(data) {
-  data.sort((a, b) => b.debit - a.debit);
-  const top3Categories = []
-  for (let i = 0; i < 5; i++) {
-    top3Categories.push({ name: data[i].category, value: parseInt(data[i].debit) })
-  }
-
-  return top3Categories
-}
-
 export function Task3() {
-  const [categories, setCategories] = useState([])
-  const [records, setRecords] = useState([])
+  const [allCategories, setAllCategories] = useState([])
+  const [allRecords, setAllRecords] = useState([])
+  const [topCredit, setTopCredit] = useState([])
+  const [topDebit, setTopDebit] = useState([])
 
   // get categories for the analysis
   useEffect(() => {
@@ -39,7 +27,7 @@ export function Task3() {
         for (const item of result) {
           categoriesSet.add(item.trim().toLowerCase())
         }*/
-        setCategories(result)
+        setAllCategories(result)
       })
       .catch(error => {
         throw new Error(`can't retrieve categories: ${error}`)
@@ -48,9 +36,9 @@ export function Task3() {
 
   // get transactions for a particular category
   useEffect(() => {
-    setRecords([])
-    if (categories?.length > 0) {
-      for (const category of categories) {
+    setAllRecords([])
+    if (allCategories?.length > 0) {
+      for (const category of allCategories) {
         findCategory(category.trim())
           .then(results => {
             let totalCredit = 0
@@ -59,7 +47,7 @@ export function Task3() {
               totalCredit += parseFloat(credit)
               totalDebit += parseFloat(debit)
             }
-            setRecords(old => [...old, {
+            setAllRecords(old => [...old, {
               category, credit: totalCredit, debit: totalDebit
             }])
           })
@@ -68,19 +56,49 @@ export function Task3() {
           })
       }
     }
-  }, [categories])
+  }, [allCategories])
+
+  const top5credit = (data) => {
+    data.sort((a, b) => b.credit - a.credit);
+    const top3Categories = []
+    for (let i = 0; (i < data.length) && (i < 5); i++) {
+      top3Categories.push({ name: data[i].category, value: parseInt(data[i].credit) })
+    }
+    return top3Categories
+  }
+
+  const top5debit = (data) => {
+    data.sort((a, b) => b.debit - a.debit);
+    const top3Categories = []
+    for (let i = 0; (i < data.length) && (i < 5); i++) {
+      top3Categories.push({ name: data[i].category, value: parseInt(data[i].debit) })
+    }
+
+    return top3Categories
+  }
+
+  useEffect(() => {
+    if (allRecords?.length > 0) {
+      setTopCredit(top5credit(allRecords))
+      setTopDebit(top5debit(allRecords))
+    }
+  }, [allRecords])
 
   return <Container>
     <Title order={3}>Task #3</Title>
 
-    {(records?.length > 0) && <Container>
-      <div>Top 5 Credit Categories</div>
-      <TrendChart width={300} height={300} data={top5credit(records)} />
+    {(setTopCredit?.length > 0) && <Container>
+      <Center>
+        <Text>Top 5 Credit Categories</Text>
+        <TrendChart width={600} height={400} data={top5credit(allRecords)} />
+      </Center>
     </Container>}
 
-    {(records?.length > 0) && <Container>
-      <div>Top 5 Debit Categories</div>
-      <TrendChart width={300} height={300} data={top5debit(records)} />
+    {(setTopDebit?.length > 0) && <Container>
+      <Center>
+        <Text>Top 5 Debit Categories</Text>
+        <TrendChart width={600} height={400} data={top5debit(allRecords)} />
+      </Center>
     </Container>}
   </Container>
 }
