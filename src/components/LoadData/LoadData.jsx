@@ -8,7 +8,7 @@ import { Center } from '@mantine/core';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from "react-router-dom";
 
-import { insertDataAll } from '../../db/util'
+import { insertData } from '../../db/util'
 
 function LoadData() {
   const [files, setFiles] = useState([])
@@ -66,7 +66,7 @@ function LoadData() {
       })
     }
 
-    insertDataAll(preparedData)
+    insertData(preparedData)
   }
 
   const handleUpload = () => {

@@ -26,7 +26,6 @@ export function Header() {
       onClick={(event) => {
         event.preventDefault()
         setActive(link.link)
-        console.log("link", { link })
         navigate(link.link)
       }}
     >

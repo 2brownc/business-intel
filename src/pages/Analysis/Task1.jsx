@@ -36,7 +36,7 @@ function Banks({ banks, setSelectedBanks }) {
 }
 
 
-export default function Analysis() {
+export default function Task1() {
   const [value, setValue] = useState('')
   const [categories, setCategories] = useState([])
   const [records, setRecords] = useState([])
@@ -111,7 +111,7 @@ export default function Analysis() {
   }, [selectedBanks, dateRange, records])
 
   return <>
-    <Title order={2}>Analysis</Title>
+    <Title order={3}>Task #1</Title>
     <Autocomplete data={categories} value={value} onChange={setValue} label={"Category"} />
     <Banks banks={banks} setSelectedBanks={setSelectedbanks} />
     <DateRange setDateRange={setDateRange} />
