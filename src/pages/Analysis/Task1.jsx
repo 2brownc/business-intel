@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react'
-import { Title, Checkbox, Autocomplete } from '@mantine/core'
+import {
+  Title,
+  Checkbox,
+  Autocomplete,
+  Box,
+  Flex
+} from '@mantine/core'
 
 import {
   getCategories,
@@ -26,11 +32,15 @@ function Banks({ banks, setSelectedBanks }) {
     })
   }
 
-  return <>
-    {banks.map((bank, id) => {
-      return <Checkbox defaultChecked key={id} label={bank} onChange={(event) => handleChange(event, bank)} />
-    })}
-  </>
+  Box
+  return <Box my={10}>
+    <div>Banks:</div>
+    <Flex gap="sm" >
+      {banks.map((bank, id) => {
+        return <Checkbox defaultChecked key={id} label={bank} onChange={(event) => handleChange(event, bank)} />
+      })}
+    </Flex>
+  </Box>
 }
 
 

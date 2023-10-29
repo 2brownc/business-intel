@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Title } from '@mantine/core'
-import { Button } from '@mantine/core'
-import { Container } from '@mantine/core'
+import {
+  Title,
+  Button,
+  Container,
+  Center,
+} from '@mantine/core'
 
 import { Task1 } from './Task1'
 import { Task2 } from './Task2'
@@ -14,26 +17,28 @@ export default function Analysis() {
   }
 
   return <>
-    <Title order={2}>Analysis</Title>
+    <Title order={2} mb={30}>Analysis</Title>
 
-    <Container>
-      <Button.Group>
-        <Button
-          variant={setVariant(1)}
-          onClick={() => setSelectedTask(1)}>
-          Task #1
-        </Button>
-        <Button
-          variant={setVariant(2)}
-          onClick={() => setSelectedTask(2)}>
-          Task #2
-        </Button>
-        <Button
-          variant={setVariant(3)}
-          onClick={() => setSelectedTask(3)}>
-          Task #3
-        </Button>
-      </Button.Group>
+    <Container mb={15}>
+      <Center>
+        <Button.Group>
+          <Button
+            variant={setVariant(1)}
+            onClick={() => setSelectedTask(1)}>
+            Task #1
+          </Button>
+          <Button
+            variant={setVariant(2)}
+            onClick={() => setSelectedTask(2)}>
+            Task #2
+          </Button>
+          <Button
+            variant={setVariant(3)}
+            onClick={() => setSelectedTask(3)}>
+            Task #3
+          </Button>
+        </Button.Group>
+      </Center>
     </Container>
 
     <Container>

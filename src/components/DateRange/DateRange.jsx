@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { DateInput } from '@mantine/dates'
+import { Grid, Box } from '@mantine/core'
 
 export function DateRange({ setDateRange }) {
   const [date1, setDate1] = useState(null)
@@ -12,21 +13,26 @@ export function DateRange({ setDateRange }) {
     })
   }, [date1, date2])
 
-  return <>
-    <div>Select the date range</div>
-    <DateInput
-      value={date1}
-      onChange={setDate1}
-      label="Date From"
-      placeholder="click to select date"
-      clearable
-    />
-    <DateInput
-      value={date2}
-      onChange={setDate2}
-      label="Date To"
-      placeholder="click to select date"
-      clearable
-    />
-  </>
+  return <Box my={20}>
+    <Grid>
+      <Grid.Col span={6}>
+        <DateInput
+          value={date1}
+          onChange={setDate1}
+          label="Date From"
+          placeholder="click to select date"
+          clearable
+        />
+      </Grid.Col>
+      <Grid.Col span={6}>
+        <DateInput
+          value={date2}
+          onChange={setDate2}
+          label="Date To"
+          placeholder="click to select date"
+          clearable
+        />
+      </Grid.Col>
+    </Grid>
+  </Box>
 }
