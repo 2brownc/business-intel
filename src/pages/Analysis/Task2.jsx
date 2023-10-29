@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Title, Autocomplete, Table } from '@mantine/core'
+import {
+  Title,
+  Autocomplete,
+  Table,
+  Box,
+  Flex
+} from '@mantine/core'
 import {
   format,
 } from 'date-fns'
@@ -87,10 +93,19 @@ export function Task2() {
 
   return <>
     <Title order={3}>Task #2</Title>
-    <Autocomplete data={categories} value={value} onChange={setValue} label={"Category"} />
+    <Autocomplete data={categories} value={value} onChange={setValue} label={"Select Category"} />
+    <Flex
+      gap="xl"
+      justify="center"
+      align="center"
+      direction="column"
+      my={15}
+    >
 
-    {(chartData?.length > 0) && <CategoryChart width={700} height={300} data={chartData} />}
 
-    {(chartData?.length > 0) && <Summary data={chartData} />}
+      {(chartData?.length > 0) && <CategoryChart width={700} height={300} data={chartData} />}
+
+      {(chartData?.length > 0) && <Box w={500}><Summary data={chartData} /></Box>}
+    </Flex>
   </>
 }

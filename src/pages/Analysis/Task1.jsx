@@ -124,7 +124,7 @@ export function Task1() {
 
   return <>
     <Title order={3}>Task #1</Title>
-    <Autocomplete data={categories} value={value} onChange={setValue} label={"Category"} />
+    <Autocomplete data={categories} value={value} onChange={setValue} label={"Select Category"} />
     <Banks banks={banks} setSelectedBanks={setSelectedbanks} />
     <DateRange setDateRange={setDateRange} />
     <TransactionTable elements={filteredRecords} />
