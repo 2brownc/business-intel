@@ -5,6 +5,7 @@ import { Container } from '@mantine/core'
 
 import { Task1 } from './Task1'
 import { Task2 } from './Task2'
+import { Task3 } from './Task3'
 
 export default function Analysis() {
   const [selectedTask, setSelectedTask] = useState(1)
@@ -38,6 +39,7 @@ export default function Analysis() {
     <Container>
       {selectedTask === 1 && <Task1 />}
       {selectedTask === 2 && <Task2 />}
+      {selectedTask === 3 && <Task3 />}
     </Container>
   </>
 }

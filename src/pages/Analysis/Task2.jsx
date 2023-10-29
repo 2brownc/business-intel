@@ -18,7 +18,6 @@ function Summary({ data }) {
   let totalDebit = 0
 
   for (const { credit, debit } of data) {
-    console.log("cd: ", credit, debit)
     totalCredit += parseFloat(credit)
     totalDebit += parseFloat(debit)
   }
