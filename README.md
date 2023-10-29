@@ -1,8 +1,7 @@
-# React + Vite
+# Business Intel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+BusinessIntel is a financial analytics platform that provides in-depth insights and analysis for businesses and individuals. With its advanced algorithms and data visualization tools, BusinessIntel helps users make informed financial decisions and optimize their financial strategies.
 
-Currently, two official plugins are available:
+With BusinessIntel, users can gain a deeper understanding of their financial situation, make data-driven decisions, and work towards their financial goals with confidence.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+It is build using ReactJS. Database is handled using RxDB. Charts are desined using Recharts.
